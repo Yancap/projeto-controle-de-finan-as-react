@@ -4,14 +4,23 @@ import { api } from "../services/api";
 interface LoginProviderProps{
     children: ReactNode;
 }
+interface LoginContext {
+    isLogin: boolean;
+    setIsLogin: (isLogin: boolean) => void;
+  }
 
-
-export const LoginContext = React.createContext({})
+export const LoginContext = React.createContext<LoginContext>({} as LoginContext)
 
 export const LoginStorage = ({children}: LoginProviderProps) => {
     const [isLogin, setIsLogin] = React.useState(false)
+    React.useEffect(()=>{
+        const token = localStorage.getItem('token')
+        if(token){
+            setIsLogin(true)
+        }
+    }, [])
     return(
-        <LoginContext.Provider value={isLogin}>
+        <LoginContext.Provider value={{isLogin, setIsLogin}}>
             {children}
         </LoginContext.Provider>
     )

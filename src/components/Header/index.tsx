@@ -9,9 +9,7 @@ interface HeaderProps {
 }
 
 export const Header = ({onOpenTransactionModal}:HeaderProps) => {
-  const isLogin = React.useContext(LoginContext)
-  console.log(isLogin);
-  
+  const {isLogin} = React.useContext(LoginContext)
   
   return (
     <Container>

@@ -26,16 +26,16 @@ export function TransactionProvider({children}: TransactionProviderProps){
     
     const [transactions, setTransactions] = React.useState<Transaction[]>([])
     React.useEffect(()=>{
-      api.get('/transactions')
-      .then(response => setTransactions(response.data.transactions))
+    //   api.get('/transactions')
+    //   .then(response => setTransactions(response.data.transactions))
     }, [])
     async function createTransaction(transactionsInput: TransactionInput){
-        const response = await api.post('/transactions', {
-            ...transactionsInput,
-            createdAt: new Date()
-        })
-        const { transaction } = response.data
-        setTransactions([...transactions, transaction])
+        // const response = await api.post('/transactions', {
+        //     ...transactionsInput,
+        //     createdAt: new Date()
+        // })
+        // const { transaction } = response.data
+        // setTransactions([...transactions, transaction])
     }
     return(
         <TransactionContext.Provider value={{transactions, createTransaction}}>

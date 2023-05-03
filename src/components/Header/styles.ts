@@ -11,7 +11,9 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+    h2{
+        color: #fff;
+    }
     button{
         font-size: 1rem;
         background: var(--blue-light);

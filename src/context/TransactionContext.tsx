@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { api } from "../services/api";
+import { showTransactions } from "../services/requests";
 
 interface Transaction{
     id: number;
@@ -17,7 +18,7 @@ interface TransactionProviderProps{
 
 interface TransactionsContextData {
     transactions: Transaction[];
-    createTransaction: (transactions: TransactionInput) => Promise<void>;
+    createTransactions: (title: string, type: string, amount: number, category: string) => Promise<any>;
 }
 
 export const TransactionContext = React.createContext<TransactionsContextData>({} as TransactionsContextData)
@@ -25,20 +26,29 @@ export const TransactionContext = React.createContext<TransactionsContextData>({
 export function TransactionProvider({children}: TransactionProviderProps){
     
     const [transactions, setTransactions] = React.useState<Transaction[]>([])
+    const [reload, setReload ] = React.useState(false)
     React.useEffect(()=>{
-    //   api.get('/transactions')
-    //   .then(response => setTransactions(response.data.transactions))
-    }, [])
-    async function createTransaction(transactionsInput: TransactionInput){
-        // const response = await api.post('/transactions', {
-        //     ...transactionsInput,
-        //     createdAt: new Date()
-        // })
-        // const { transaction } = response.data
-        // setTransactions([...transactions, transaction])
+      const resp = showTransactions()
+      resp.then(response => setTransactions(response))
+    }, [reload])
+    async function createTransactions(title: string, type: string, amount: number, category: string){
+        const token = localStorage.getItem('token');
+        const response = await api.post('transactions/create', {
+            title,
+            type,
+            amount,
+            category
+          }, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        });
+        setReload(!reload)
+        return response
     }
+    
     return(
-        <TransactionContext.Provider value={{transactions, createTransaction}}>
+        <TransactionContext.Provider value={{transactions, createTransactions}}>
             {children}
         </TransactionContext.Provider>
     )

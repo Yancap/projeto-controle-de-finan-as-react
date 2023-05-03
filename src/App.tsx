@@ -6,7 +6,7 @@ import Modal from 'react-modal'
 import { TransactionModal } from "./components/TransactionModal";
 import { TransactionProvider } from "./context/TransactionContext";
 import { LoginStorage } from "./context/LoginContext";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 
@@ -20,6 +20,7 @@ export function App() {
   function handleCloseModal(){
     setTransactionModal(false)
   }
+  
   return (
     <BrowserRouter>
       <GlobalStyle />

@@ -12,7 +12,7 @@ interface Login{
 
 
 export const Login = () => {
-  const {setIsLogin} = React.useContext(LoginContext)
+  const {setIsLogin, setName} = React.useContext(LoginContext)
   const [login, setLogin] = React.useState({
     email: '',
     password: ''
@@ -27,7 +27,9 @@ export const Login = () => {
     } else {
       setError('null')
       localStorage.setItem('token', response.token)
+      localStorage.setItem('name', response.name)
       setIsLogin(true)
+      setName(response.name)
       navigate('/')
     }
   }

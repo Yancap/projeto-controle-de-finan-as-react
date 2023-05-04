@@ -4,7 +4,7 @@ import { Header } from "./components/Header";
 import { GlobalStyle } from "./styles/global";
 import Modal from 'react-modal'
 import { TransactionModal } from "./components/TransactionModal";
-import { TransactionProvider } from "./context/TransactionContext";
+import { TransactionContext, TransactionProvider } from "./context/TransactionContext";
 import { LoginStorage } from "./context/LoginContext";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { Login } from "./components/Login";
@@ -13,7 +13,7 @@ import { Register } from "./components/Register";
 
 Modal.setAppElement('#root')
 export function App() {
-  const [ transactionModal, setTransactionModal ] = React.useState(false)
+  const { transactionModal, setTransactionModal } = React.useContext(TransactionContext)
   function handleOpenModal(){
     setTransactionModal(true)
   }
@@ -29,10 +29,11 @@ export function App() {
               <Header onOpenTransactionModal={handleOpenModal}/>
               <Routes>
                 <Route path='/' element={<>
-                  <Dashboard />
+                  <Dashboard handleOpenModal={handleOpenModal} />
                   <TransactionModal 
                     isOpen={transactionModal}
-                    onRequestClose={handleCloseModal}/>
+                    onRequestClose={handleCloseModal}
+                    />
                 </>}/>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />

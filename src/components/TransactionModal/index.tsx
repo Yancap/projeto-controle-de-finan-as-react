@@ -7,28 +7,58 @@ import outcome from '../../assets/outcome.svg'
 //import { createTransactions } from "../../services/requests";
 import { TransactionContext } from "../../context/TransactionContext";
 
-
+interface EditTransaction{
+  id: number;
+  title: string;
+  amount: number;
+  type: string;
+  category: string;
+}
 interface TransactionModalProps{
   isOpen: boolean;
   onRequestClose: () => void;
 }
 
 
-export function TransactionModal({isOpen, onRequestClose}:TransactionModalProps){
-    const { createTransactions } = React.useContext(TransactionContext)
+export function TransactionModal({isOpen, onRequestClose}: TransactionModalProps){
+    
+    const { createTransactions, edit, setEdit } = React.useContext(TransactionContext)
     const [ type, setType ] = React.useState('deposit')
     const [ title, setTitle ] = React.useState('')
     const [ amount, setAmount ] = React.useState(0)
     const [ category, setCategory ] = React.useState('')
+  
+    
     async function handleCreateNewTransaction(event: React.FormEvent){
       event.preventDefault()
-      await createTransactions( title, type, amount, category)
-      setTitle('')
-      setAmount(0)
-      setCategory('')
-      setType('deposit')
-      onRequestClose()
+      if (edit.id === 0) {
+        await createTransactions( title, type, amount, category)
+        setTitle('')
+        setAmount(0)
+        setCategory('')
+        setType('deposit')
+        onRequestClose()
+        setEdit({
+          id: 0,
+          title: '',
+          amount: 0,
+          type: 'deposit',
+          category: ''
+        })
+      } else {
+        //Fazer a requisição de update
+      }
+      
     }
+    React.useEffect(() =>{
+      if (edit.id !== 0) {
+        setTitle(edit.title)
+        setAmount(edit.amount)
+        setCategory(edit.category)
+        setType(edit.type)
+        console.log(edit);
+      }
+    }, [edit])
     return (
         <Modal 
           isOpen={isOpen}

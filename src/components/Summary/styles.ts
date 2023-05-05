@@ -27,4 +27,14 @@ export const Container = styled.div`
         background: var(--green);
         color: #fff;
     }
+    @media screen and (max-width: 720px){
+        strong{
+            font-size: 1.5rem;
+        }
+    }
+    @media screen and (max-width: 601px){
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 `

@@ -25,9 +25,6 @@ export const Container = styled.div`
     table{
         width: 100%;
         border-spacing: 0 .5rem;
-        thead{
-            
-        }
         th {
             color: var(--text-body);
             font-weight: 400;
@@ -40,7 +37,11 @@ export const Container = styled.div`
             border: 0;
             background: var(--shape);
             color: var(--text-body);
-            border-radius: 0%.25rem;
+            border-radius: 0.25rem;
+            max-width: 20ch;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
             &:first-child{
                 color: var(--text-title);
             }
@@ -114,6 +115,30 @@ export const Container = styled.div`
                     transform: translateX(-150px);
                     z-index: -1;
                 }
+            }
+        }
+        @media screen and (max-width: 768px) {
+            th,td{
+                padding: .5rem 1rem;
+            }
+            svg{
+                width: 1rem;
+            }
+        }
+        @media screen and (max-width: 600px) {
+            th,td{
+                padding: 1rem .5rem;
+            }
+        }
+        @media screen and (max-width: 575px) {
+            th.settings{
+                display: none;
+            }
+            td.config{
+                display: none;
+            }
+            tbody tr{
+                /* Fazer um Modal para cada linha da tabela */
             }
         }
     }

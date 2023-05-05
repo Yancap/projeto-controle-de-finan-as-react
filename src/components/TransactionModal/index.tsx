@@ -22,7 +22,7 @@ interface TransactionModalProps{
 
 export function TransactionModal({isOpen, onRequestClose}: TransactionModalProps){
     
-    const { createTransactions, edit, setEdit } = React.useContext(TransactionContext)
+    const { createTransactions, updateTransactions, edit, setEdit } = React.useContext(TransactionContext)
     const [ type, setType ] = React.useState('deposit')
     const [ title, setTitle ] = React.useState('')
     const [ amount, setAmount ] = React.useState(0)
@@ -33,21 +33,21 @@ export function TransactionModal({isOpen, onRequestClose}: TransactionModalProps
       event.preventDefault()
       if (edit.id === 0) {
         await createTransactions( title, type, amount, category)
-        setTitle('')
-        setAmount(0)
-        setCategory('')
-        setType('deposit')
-        onRequestClose()
-        setEdit({
-          id: 0,
-          title: '',
-          amount: 0,
-          type: 'deposit',
-          category: ''
-        })
       } else {
-        //Fazer a requisição de update
+        await updateTransactions(edit.id,title, type, amount, category)
       }
+      setTitle('')
+      setAmount(0)
+      setCategory('')
+      setType('deposit')
+      onRequestClose()
+      setEdit({
+        id: 0,
+        title: '',
+        amount: 0,
+        type: 'deposit',
+        category: ''
+      })
       
     }
     React.useEffect(() =>{
@@ -56,9 +56,22 @@ export function TransactionModal({isOpen, onRequestClose}: TransactionModalProps
         setAmount(edit.amount)
         setCategory(edit.category)
         setType(edit.type)
-        console.log(edit);
-      }
+      } 
     }, [edit])
+    function handleCloseModal(){
+      setTitle('')
+      setAmount(0)
+      setCategory('')
+      setType('deposit')
+      setEdit({
+        id: 0,
+        title: '',
+        amount: 0,
+        type: 'deposit',
+        category: ''
+      })
+      onRequestClose()
+    }
     return (
         <Modal 
           isOpen={isOpen}
@@ -66,7 +79,7 @@ export function TransactionModal({isOpen, onRequestClose}: TransactionModalProps
           className='react-modal-content'
           overlayClassName='react-modal-overlay'
           >
-          <button type="button" onClick={onRequestClose} className="react-modal-close">
+          <button type="button" onClick={handleCloseModal} className="react-modal-close">
             <img src={close} alt="Close Modal" />
           </button>
 
@@ -79,7 +92,6 @@ export function TransactionModal({isOpen, onRequestClose}: TransactionModalProps
             />
             <input type="number" 
               placeholder="Valor"
-              value={amount}
               onChange={event => setAmount(+event.target.value)}
             />
             <TransactionTypeContainer>

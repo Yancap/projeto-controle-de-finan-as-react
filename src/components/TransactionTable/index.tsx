@@ -11,7 +11,7 @@ interface TableProps {
   }
   
 export const TransactionTable = ({onOpenTransactionModal}: TableProps) => {
-  const {transactions, setEdit} = React.useContext(TransactionContext)
+  const {transactions, setEdit, deleteTransactions} = React.useContext(TransactionContext)
   const [settings, setSettings] = React.useState(false)
   return (
     <Container>
@@ -22,7 +22,7 @@ export const TransactionTable = ({onOpenTransactionModal}: TableProps) => {
                     <th>Valor</th>
                     <th>Categoria</th>
                     <th>Datas</th>
-                    <th>
+                    <th className='settings'>
                         <div className='settings' onClick={() => setSettings(!settings)}>
                             {settings ? <Close /> : <Settings />}
                         </div>
@@ -54,7 +54,10 @@ export const TransactionTable = ({onOpenTransactionModal}: TableProps) => {
                             >
                               <Edit />  
                             </div>
-                            <div className='delete'>
+                            <div className='delete'
+                                onClick={() =>{
+                                    deleteTransactions(data.id)
+                                }}>
                                <Delete /> 
                             </div>
                             

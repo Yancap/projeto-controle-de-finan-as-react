@@ -62,20 +62,6 @@ export async function autoLogin(navigate: (url: string) => void){
     
 }
 
-export async function createTransactions(title: string, type: string, amount: number, category: string){
-    const token = localStorage.getItem('token');
-    const response = await api.post('transactions/create', {
-        title,
-        type,
-        amount,
-        category
-      }, {
-        headers: {
-            'Authorization': 'Bearer ' + token
-        }
-    });
-    return response
-}
 
 export async function showTransactions(){
     const token = localStorage.getItem('token');
@@ -86,3 +72,4 @@ export async function showTransactions(){
     });
     return response.data;
 }
+

@@ -7,7 +7,6 @@ import { TransactionContext } from '../../context/TransactionContext'
 
 export const Summary = () => {
   const {transactions}= React.useContext(TransactionContext)
-
   const summary = transactions.reduce((acc, transaction) =>{
     if(transaction.type === 'deposit'){
         acc.deposit += transaction.amount

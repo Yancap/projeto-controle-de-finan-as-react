@@ -30,5 +30,19 @@ export const Content = styled.div`
             filter: brightness(0.9);
         }
     }
+    @media screen and (max-width: 650px){
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 2rem;
+        h2{
+            font-size: 2.5rem;
+        }
+        button{
+            font-size: 1.5rem;
+            height: 3.5rem;
+            padding: 0 2.5rem;
+        }
+    }
 `
     

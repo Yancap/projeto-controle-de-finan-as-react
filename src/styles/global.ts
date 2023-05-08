@@ -50,7 +50,7 @@ export const GlobalStyle = createGlobalStyle`
         cursor: not-allowed;
     }
     #root{
-        min-height: 100%;
+        min-height: 100vh;
         position: relative;
     }
     .react-modal-overlay{

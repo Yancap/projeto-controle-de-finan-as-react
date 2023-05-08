@@ -39,6 +39,9 @@ export const Container = styled.form`
             filter: brightness(0.9);
         }
     }
+    @media screen and (max-width: 360px){
+        
+    }
 `
 
 export const TransactionTypeContainer = styled.div`

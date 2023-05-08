@@ -2,6 +2,27 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     margin-top: 3.5rem;
+    overflow-x: auto;
+    &::-webkit-scrollbar-track{
+        border-radius:1rem;
+        background-color: #fff;
+        filter: blur(1);
+        opacity: 0.6;
+        height: .5rem;
+    }
+
+    &::-webkit-scrollbar{
+        width: 6px;
+        height: .75rem;
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb{
+        border-radius:1rem;
+        -webkit-box-shadow: inset 0 0 2px var(--text-body);
+        background-color: var(--background);
+        height: .5rem;
+    }
     div.settings{
         display: flex;
         align-items: center;
@@ -24,6 +45,7 @@ export const Container = styled.div`
     }
     table{
         width: 100%;
+        max-width: 100%;
         border-spacing: 0 .5rem;
         th {
             color: var(--text-body);
@@ -131,12 +153,12 @@ export const Container = styled.div`
             }
         }
         @media screen and (max-width: 575px) {
-            th.settings{
+            /* th.settings{
                 display: none;
             }
             td.config{
                 display: none;
-            }
+            } */
             tbody tr{
                 /* Fazer um Modal para cada linha da tabela */
             }

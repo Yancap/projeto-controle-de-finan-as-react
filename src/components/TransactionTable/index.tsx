@@ -5,6 +5,7 @@ import { ReactComponent as Settings } from '../../assets/settings.svg'
 import { ReactComponent as Close } from '../../assets/close-settings.svg'
 import { ReactComponent as Edit } from '../../assets/edit.svg'
 import { ReactComponent as Delete } from '../../assets/delete.svg'
+import { LoginContext } from '../../context/LoginContext'
 
 interface TableProps {
     onOpenTransactionModal: () => void;
@@ -12,6 +13,7 @@ interface TableProps {
   
 export const TransactionTable = ({onOpenTransactionModal}: TableProps) => {
   const {transactions, setEdit, deleteTransactions} = React.useContext(TransactionContext)
+  const { isLogin } = React.useContext(LoginContext)
   const [settings, setSettings] = React.useState(false)
   return (
     <Container>
@@ -32,7 +34,7 @@ export const TransactionTable = ({onOpenTransactionModal}: TableProps) => {
             </thead>
 
             <tbody>
-                {transactions.map( data => (
+                {isLogin && transactions.map( data => (
                     <tr key={data.id} data-transaction={data.id}>
                         <td>{data.title}</td>
                         <td className={data.type}>

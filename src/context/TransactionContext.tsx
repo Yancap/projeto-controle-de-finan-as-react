@@ -30,6 +30,8 @@ interface TransactionsContextData {
     setError: (error: Error) => void;
     del: Delete;
     setDel: (del: Delete) => void;
+    reload: boolean;
+    setReload: (reload: boolean) => void;
 }
 
 interface Error {
@@ -108,7 +110,7 @@ export function TransactionProvider({children}: TransactionProviderProps){
     return(
         <TransactionContext.Provider 
         value={{transactions, createTransactions, updateTransactions, deleteTransactions, edit, setEdit, 
-        transactionModal, setTransactionModal, error, setError, del, setDel}}>
+        transactionModal, setTransactionModal, error, setError, del, setDel, reload, setReload}}>
             {children}
         </TransactionContext.Provider>
     )

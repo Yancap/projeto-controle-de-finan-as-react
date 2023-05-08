@@ -54,9 +54,9 @@ export async function autoLogin(navigate: (url: string) => void){
         }
         })
         if (response && response.data.redirect) {
-            navigate('/login')
             localStorage.removeItem('name')
             localStorage.removeItem('token')
+            navigate('/login')
         } 
     }
     

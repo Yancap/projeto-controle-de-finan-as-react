@@ -14,6 +14,11 @@ export const Content = styled.div`
     h2{
         color: #fff;
     }
+    div{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
     button{
         font-size: 1rem;
         background: var(--blue-light);
@@ -37,6 +42,7 @@ export const Content = styled.div`
         gap: 2rem;
         h2{
             font-size: 2.5rem;
+            text-align: center;
         }
         button{
             font-size: 1.5rem;

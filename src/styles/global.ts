@@ -29,6 +29,8 @@ export const GlobalStyle = createGlobalStyle`
     body{
         background: var(--background);
         -webkit-font-smoothing:antialiased;
+        overflow-x: hidden;
+        
     }
     body, input, textarea, button{
         font-family: 'Poppins', sans-serif;
@@ -46,6 +48,10 @@ export const GlobalStyle = createGlobalStyle`
     [disabled]{
         opacity: 0.6;
         cursor: not-allowed;
+    }
+    #root{
+        min-height: 100%;
+        position: relative;
     }
     .react-modal-overlay{
         background: rgba(0, 0, 0, 0.5);
@@ -65,6 +71,9 @@ export const GlobalStyle = createGlobalStyle`
         padding: 4rem;
         position: relative;
         border-radius: 0.25rem;
+        @media screen and (max-width: 360px){
+            padding: 2rem;
+        }
     }
     .react-modal-close{
         position: absolute;

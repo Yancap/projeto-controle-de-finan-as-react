@@ -9,7 +9,6 @@ import { LoginStorage } from "./context/LoginContext";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
-import { Footer } from "./components/Footer";
 
 
 Modal.setAppElement('#root')
@@ -39,7 +38,6 @@ export function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
               </Routes>
-              <Footer />
             </TransactionProvider> 
         </LoginStorage>
     </BrowserRouter>

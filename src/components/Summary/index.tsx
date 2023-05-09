@@ -4,9 +4,11 @@ import outcome from '../../assets/outcome.svg'
 import total from '../../assets/total.svg'
 import { Container } from './styles'
 import { TransactionContext } from '../../context/TransactionContext'
+import { LoginContext } from '../../context/LoginContext'
 
 export const Summary = () => {
   const {transactions}= React.useContext(TransactionContext)
+  const { isLogin } = React.useContext(LoginContext)
   const summary = transactions.reduce((acc, transaction) =>{
     if(transaction.type === 'deposit'){
         acc.deposit += transaction.amount
@@ -26,10 +28,13 @@ export const Summary = () => {
                 <img src={income} alt="Entradas" />
             </header>
             <strong>
-                {new Intl.NumberFormat('pt-BR', {
+                {isLogin ? new Intl.NumberFormat('pt-BR', {
                                 style:'currency',
                                 currency:'BRL'
-                }).format(summary.deposit)}
+                }).format(summary.deposit) : new Intl.NumberFormat('pt-BR', {
+                    style:'currency',
+                    currency:'BRL'
+                 }).format(0)}
            </strong>
         </div>
         <div>
@@ -38,10 +43,13 @@ export const Summary = () => {
                 <img src={outcome} alt="Saidas" />
             </header>
             <strong>
-                - {new Intl.NumberFormat('pt-BR', {
+                - {isLogin ? new Intl.NumberFormat('pt-BR', {
                                 style:'currency',
                                 currency:'BRL'
-                }).format(summary.withdraw)}
+                }).format(summary.withdraw) : new Intl.NumberFormat('pt-BR', {
+                    style:'currency',
+                    currency:'BRL'
+                 }).format(0)}
             </strong>
         </div>
         <div>
@@ -50,10 +58,13 @@ export const Summary = () => {
                 <img src={total} alt="Total" />
             </header>
             <strong>
-                {new Intl.NumberFormat('pt-BR', {
+                {isLogin ? new Intl.NumberFormat('pt-BR', {
                                 style:'currency',
                                 currency:'BRL'
-                }).format(summary.total)}
+                }).format(summary.total) : new Intl.NumberFormat('pt-BR', {
+                    style:'currency',
+                    currency:'BRL'
+                 }).format(0)}
             </strong>
         </div>
     </Container>
